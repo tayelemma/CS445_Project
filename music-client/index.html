@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIU Music Station</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="./main.css" rel="stylesheet" type="text/css" />
+    <script src="./main.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+    <!-- The header login/logout/search -->
+
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <header id="header" class="container-fluid">
+            <div id="left">
+               <a class="navbar-brand" href="#">
+                  <!-- <img id="img1" class="header-logo-1" logo="image" src="./image/gitar.PNG" alt="logo" /> -->
+                  <img id="img2" class="header-logo-2" logo="image" src="./image/music.PNG" alt="logo" />
+               </a>
+            </div>
+            <div id="right">
+
+                <div id="search">
+                    <input id="search-input">
+                    <button id = "searchBtn"class="btn btn-warning">Search</button>
+                </div>
+
+                <div id="login-div">
+                    <input id="username" value="pop">
+                    <input id="password" value="password">
+                    <button class="btn btn-warning" id="loginBtn">Login</button>
+                    <div id="errormessage"></div>
+                </div>
+
+                <div id="logout-div">
+                    <button class="btn btn-warning" id="logoutBtn">Logout</button>
+                </div>
+
+            </div>
+        </header>
+     </nav>
+
+        <div id="playlist-header">
+             <h1>Song you may interest</h1>
+        </div>
+       
+        <h4 id="entry">Welcome to Media Player</h4>
+        <div id="content">
+           
+        </div>
+
+
+        <!-- Playlist header -->
+        <div id="head-title">
+             <h1 >Your playlist</h1>
+        </div>
+
+
+        <!--Playlist table   -->
+        <div id="playlist">
+          
+        </div>
+
+
+        <!-- Music player  -->
+        <div class="music-container" id="play-bar">
+          
+            <audio src="" id="audio" ></audio>
+
+             <div class="navigation"id="player">
+                <!-- back button  -->
+                 <button id="prev" class="action-btn"> 
+                       <i class="fas fa-backward"></i>
+                 </button>
+                 <!-- play button -->
+                  <button id="play" class="action-btn action-btn-big"> 
+                       <i class="fas fa-play"></i>
+                 </button>
+                 <!-- next button -->
+                 <button id="next" class="action-btn"> 
+                       <i class="fas fa-forward"></i>
+                 </button> 
+                 <!-- Reapeat button -->
+                 <button id ='repeat' class="action-btn">
+                         <i class="fas fa-repeat"></i> 
+                </button>
+              
+
+                 <div class="progress"></div>
+
+               </div>
+               <!-- <div class=" music-info" id="music-info">
+                 <h6 id="title">Waiting for song....</h6> 
+                 <div class="progress-container">
+                </div> -->
+
+              </div>
+        </div>
+            
+    </div>
+</body>
+
+
+</html>

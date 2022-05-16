@@ -1,0 +1,187 @@
+.container {
+    margin-top: 10px;
+    background-color: rgb(58, 36, 36);
+   
+}
+#img1{
+    width: 80px;
+   
+}
+#img2{
+
+    width: 200px;
+    border-top-right-radius: 100px;
+    margin-left: -27px;
+    margin-bottom: -10px;
+
+    
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#header #right {
+    width: 650px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#header #search {
+    display: none;
+}
+
+#header #logout-div {
+    display: none;
+}
+
+#errormessage {
+    color: red;
+}
+body{
+    background-color: black;
+}
+
+#playBtn{
+    border: solid white;
+    background-color: rgb(46, 44, 44);
+    color: white;
+    border-radius: 50px;
+    font-size: 8px;
+   
+}
+#removebtn{
+    border: solid white;
+    background-color: rgb(46, 44, 44);
+    color:white;
+    font-size: 20px;
+    border-radius: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+#addBtn{
+    color: white;
+    background-color: rgb(46, 44, 44);
+    border: solid white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 20px;
+    /* text-align: center; */
+    /* padding: -5px 5px -5px 5px; */
+
+    
+}
+#entry{
+    color: white;
+}
+
+#playlist-table{
+    background-color: rgb(46, 44, 44);
+    color: white;
+
+}
+#playlist-table tr:nth-child(1){
+    background-color: black;
+    color:white;
+    border-radius: 8px;
+}
+#music-table{
+    margin-top: 20px;
+    background-color: rgb(46, 44, 44);
+    color: white;
+}
+#music-table tr:nth-child(1){
+    background-color: black;
+    
+
+}
+#music-table tr:hover{
+    background-color: rgb(70, 65, 65);
+    
+}
+#playlist-table tr:hover {
+    background-color: rgb(70, 65, 65);
+
+}
+#playlist-header h1 {
+    padding-top: 10px;
+    color: aquamarine;
+    font-family: Impact, Haettenschweiler, ' sans-serif';
+}
+#head-title h1{
+    padding-top: 10px;
+    color: aquamarine;
+    font-family: Impact, Haettenschweiler, ' sans-serif';
+}
+
+
+/* for music player */
+.music-container{
+    display: inline;
+    flex:auto;
+    background-color:rgb(247, 181, 38);
+    border-radius: 50px;
+    box-shadow: pink;
+    /* display:flex; */
+    padding: 10px 10px;
+    margin: 50px 0px;
+   
+       
+}
+.navigation{
+    display: flex;
+    /* align-items: center; */
+   
+
+}
+.action-btn{
+background-color: rgb(247, 181, 38);
+    border: 0;
+    color: gray;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 0px;
+  
+}
+.action-btn-big{
+    color: gray;
+    font-size: 20px;
+}
+.action-btn:focus{
+    /* outline:0 */
+}
+.music-info{
+    /* background-color: aquamarine; */
+    height: 20px;
+    width: 70%;
+    display: inline;
+
+    
+    
+}
+.music-container.play .music-info{
+
+}
+.progress-container{
+    background: #fff;
+    border-radius: 5px;
+    cursor:pointer;
+    margin:10px 0;
+    height: 4px;
+    width: 100%;
+
+}
+
+.progress{
+   background-color:gray;
+   border-radius: 5px;
+   /* height: 100%; */
+   height: 4px;
+   width: 100%;
+   transition: width 0.1s linear;
+  
+}
+
+
