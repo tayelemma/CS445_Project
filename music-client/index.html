@@ -9,100 +9,80 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   
     <link href="./main.css" rel="stylesheet" type="text/css" />
+     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <script src="./main.js"></script>
 </head>
 
 <body>
     <div class="container">
-
-    <!-- The header login/logout/search -->
-
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <header id="header" class="container-fluid">
-            <div id="left">
+        <header            id="header" class="container-fluid">
+            <div           id="left">
                <a class="navbar-brand" href="#">
-                  <!-- <img id="img1" class="header-logo-1" logo="image" src="./image/gitar.PNG" alt="logo" /> -->
-                  <img id="img2" class="header-logo-2" logo="image" src="./image/music.PNG" alt="logo" />
+                  <img     id="img2" class="header-logo-2" logo="image" src="./image/music.PNG" alt="logo" />
                </a>
             </div>
-            <div id="right">
+            <div            id="right">
 
-                <div id="search">
-                    <input id="search-input">
-                    <button id = "searchBtn"class="btn btn-warning">Search</button>
+                <div        id="search">
+                    <input  id="search-input">
+                    <button id ="searchBtn"class="btn btn-warning">Search</button>
                 </div>
 
                 <div id="login-div">
-                    <input id="username" value="pop">
-                    <input id="password" value="password">
-                    <button class="btn btn-warning" id="loginBtn">Login</button>
-                    <div id="errormessage"></div>
+                    <input  id="username" value="pop">
+                    <input  id="password" value="password">
+                    <button id="loginBtn"class="btn btn-warning" >Login</button>
+                    <div    id="errormessage"></div>
                 </div>
 
-                <div id="logout-div">
-                    <button class="btn btn-warning" id="logoutBtn">Logout</button>
+                <div         id="logout-div">
+                    <button  id="logoutBtn"   class="btn btn-warning" >Logout</button>
                 </div>
-
             </div>
         </header>
      </nav>
 
-        <div id="playlist-header">
-             <h1>Song you may interest</h1>
-        </div>
-       
-        <h4 id="entry">Welcome to Media Player</h4>
-        <div id="content">
-           
-        </div>
+        <div id="playlist-header"><h1>Song you may interest</h1></div>
+        <h4  id="entry">Welcome to Media Player</h4>
+        <div id="content"></div>
+        <div id="head-title"><h1 >Your playlist</h1></div>
+        <div id="playlist"></div>
 
 
-        <!-- Playlist header -->
-        <div id="head-title">
-             <h1 >Your playlist</h1>
-        </div>
+        <div             id="play-bar"  class="music-container" >
+             <!-- <audio      id="audio"     src=""    ></audio> -->
+              <div        id="player"    class="navigation">
+               
+                 <!-- <button id="prev"    class="action-btn">  <i class="fas fa-backward"></i></button>
+                 <button id="play"    class="action-btn action-btn-big"> <i class="fas fa-play"></i></button>
+                 <button id="next"    class="action-btn"> <i class="fas fa-forward"></i></button> 
+                 <button id ='repeat' class="action-btn"><i class="fas fa-repeat"></i> </button> -->
+             </div>
 
+               <!-- <div    id="music-info"   class=" music-info" > -->
+                 <!-- <h6   id="title">Waiting for song....</h6>  -->
+                 <!-- <div  id="progressContainerId" class="progress-container">
+                      <div id="progressId" class="progress"></div>
+                 </div> -->
+              <!-- </div> -->
 
-        <!--Playlist table   -->
-        <div id="playlist">
-          
-        </div>
+              <div id="play-div">
+                  <h6 id="title">Waiting for song....</h6> 
+                  <!-- <audio id="audio" src=""  controls autoplay>
+                          
+                 </audio> -->
 
-
-        <!-- Music player  -->
-        <div class="music-container" id="play-bar">
-          
-            <audio src="" id="audio" ></audio>
-
-             <div class="navigation"id="player">
-                <!-- back button  -->
-                 <button id="prev" class="action-btn"> 
-                       <i class="fas fa-backward"></i>
-                 </button>
-                 <!-- play button -->
-                  <button id="play" class="action-btn action-btn-big"> 
-                       <i class="fas fa-play"></i>
-                 </button>
-                 <!-- next button -->
-                 <button id="next" class="action-btn"> 
-                       <i class="fas fa-forward"></i>
-                 </button> 
-                 <!-- Reapeat button -->
-                 <button id ='repeat' class="action-btn">
-                         <i class="fas fa-repeat"></i> 
-                </button>
-              
-
-                 <div class="progress"></div>
-
-               </div>
-               <!-- <div class=" music-info" id="music-info">
-                 <h6 id="title">Waiting for song....</h6> 
-                 <div class="progress-container">
-                </div> -->
+                 <div id="media-div" class="play">
+                    
+                 </div>
 
               </div>
+              
+   
         </div>
             
     </div>

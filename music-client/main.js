@@ -1,14 +1,7 @@
+"use strict";
+/*eslint-disable */
 
 const SERVER_ROOT = 'http://localhost:3000';
-//Attributs for Playing the songs......................................... 
-// const musicContainer = document.querySelector('.music-container');
-// const playBtn = document.querySelector('#play');
-// const prevBtn = document.querySelector('#prev');
-// const nextBtn = document.querySelector('#next');
-// const audio = document.querySelector('#audio');
-// const progress = document.querySelector('.progress');
-// const progressContainer = document.querySelector('.progress-container');
-// const title = document.querySelector('#title');
 
 window.onload = function () {
 
@@ -28,10 +21,13 @@ window.onload = function () {
                 password
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+
             }
         }).then(response => response.json())
-            .then(data => loggedInFeatures(data));
+            .then(data => loggedInFeatures(data))
+            .catch(err=> console.log(err));
     }
 
     document.getElementById('logoutBtn').onclick = function () {
@@ -42,21 +38,9 @@ window.onload = function () {
     document.getElementById('searchBtn').onclick = function () {
         searchMusic();
     }
-
-
-    //Actions for playing the song..........................
-
-    // playBtn.addEventListener('click', playMusic);
-    // prevBtn.addEventListener('click', prevSong);
-    // nextBtn.addEventListender('click', nextSong);
-    // audio.addEventListener('timeupdate', updateProgress);
-    // progressContainer.addEventListener('click', setProgress);
-    // audio.addEventListener('ended', nextSong);
-
-
 }
 
-//Working
+//Working....................
 function loggedInFeatures(data) {
     if (data.status) {
         document.getElementById('errormessage').innerHTML = data.message;
@@ -69,7 +53,7 @@ function loggedInFeatures(data) {
 }
 
 
-//Working
+//Working....................
 function fetchMusic() {
 
     fetch(`${SERVER_ROOT}/api/music`, {
@@ -111,12 +95,12 @@ function fetchMusic() {
         });
 }
 
-//Working
+//Working...........................
 function fetchPlayList() {
     fetch(`${SERVER_ROOT}/api/playlist`, {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        }
+        },
     })
         .then(response => response.json())
         .then(playlist => {
@@ -136,8 +120,8 @@ function fetchPlayList() {
                     <td>${music.orderId} </td>
                     <td> ${music.title}</td>
                     <td>  
-                       <button id='removebtn' data-del="${music.songId}" onclick='deleteById(this)'> X </button> 
-                       <button class='action-btn' id= 'playBtn' onclick ='addplaylist(${music.orderId})'> <i class='fas fa-play' </button>
+                       <button id='removebtn' data-del="${music.orderId}" onclick='deleteById(this)'> X </button> 
+                       <button class='action-btn' id= 'playBtn' data-music="${music.title}" data-playlist="${music.orderId}" onclick ='playMusic(this)'> <i class='fas fa-play' </button>
                     </td>
                 </tr>
             `;
@@ -180,7 +164,7 @@ function notLogin() {
     document.getElementById('content').style.display='none';
 
 }
-//SEARCH..................
+//working..................
 function searchMusic() {
     let searchText = document.getElementById('search-input');
     fetch(`${SERVER_ROOT}/api/music?search=${searchText.value}`, {
@@ -225,7 +209,7 @@ function searchMusic() {
 }
 
 
-//Working
+//Working.....................
 function deleteById(obj) {
 let id = obj.getAttribute("data-del");
     fetch(`${SERVER_ROOT}/api/playlist/remove`, {
@@ -251,14 +235,13 @@ let id = obj.getAttribute("data-del");
                 </tr>
         `;
             playlist.forEach(music => {
-
                 html += `
                 <tr id="trplaylist">
                     <td>${music.orderId} </td>
                     <td> ${music.title}</td>
                     <td>  
                        <button id='removebtn'  data-del="${music.songId}" onclick='deleteById(this)'> X </button>
-                       <button class='action-btn' id= 'playBtn' data-playBtn= "${music.title}" onclick ='playMusic(this)'> <i class='fas fa-play' </button>
+                       <button class='action-btn' id= 'playBtn' data-music= "${music.title}" onclick ='playMusic(this)'> <i class='fas fa-play' </button>
                     </td>
                 </tr>
             `;
@@ -271,11 +254,8 @@ let id = obj.getAttribute("data-del");
         });
 }
 
-
-//Working..............need some adution
+//Working..............
 function addplaylist(obj) {
-    let playlistTble = document.getElementById("trplaylist");
-    // playlistTble.innerHTML = "";
     let id = obj.getAttribute("data-add");
     console.log(id);
    
@@ -286,7 +266,7 @@ function addplaylist(obj) {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify({
-                    songId: id
+                    songId: id,
                 })
             })
                 .then(response => response.json())
@@ -301,14 +281,13 @@ function addplaylist(obj) {
                 </tr>
         `;
                     playlist.forEach(music => {
-
                         html += `
                 <tr id="trplaylist">
                     <td>${music.orderId} </td>
                     <td> ${music.title}</td>
                     <td>  
                        <button id='removebtn'  data-del="${music.songId}" onclick='deleteById(this)'> X </button>
-                       <button class='action-btn' id= 'playBtn' data-playBtn= "${music.title}" onclick ='playMusic(this)'> <i class='fas fa-play' </button>
+                       <button class='action-btn' id= 'playBtn' data-music="${music.title}" onclick ='playMusic(this)'> <i class='fas fa-play' </button>
                     </td>
                 </tr>
             `;
@@ -317,103 +296,102 @@ function addplaylist(obj) {
             </tbody>
             </table>
         `;
-                    document.getElementById('playlist').innerHTML = html;
-
-                    
+                    document.getElementById('playlist').innerHTML = html;                    
                 });
         }
 
 function playMusic(obj) {
-
-    let id = obj.getAttribute("data-playBtn");
+    let title = document.getElementById('title');
+    let id1 = obj.getAttribute("data-playlist");
+    console.log(id1);
+    let id = obj.getAttribute("data-music");
+    console.log(id);
     fetch(`${SERVER_ROOT}/api/music?search=${id}`, {
         method: 'GET',
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
-            'Authorization': `Bearer ${sessionStorage.getItem('keyaccess')}`
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            
         }
     }).then(response => response.json())
         .then(music => {
-            console.log(music[0].urlPath);
-            title.innerText = music.title;
-            audio.src = music[0].urlPath;          
+            let onPlay = ` 
+                 <button id="prev"  onclick="prevSong(this);"   class="action-btn"   data-prev="${id1}">     <i class="fas fa-backward"></i></button>
+                 <button id="next"  onclick="nextSong(this)"    class="action-btn"   data-next="${id1}">     <i class="fas fa-forward"></i></button>
+                 <audio id="media-audio" controls autoplay >
+                          <source src="http://localhost:3000/${music[0].urlPath}" type="audio/mpeg">
+                 </audio>
+                <button id='repeat' onclick="repeatMusic()"  class="action-btn"  data-repeat="">    <i class="fas fa-repeat"></i> </button>    
+                `
+                ;
+            let audio = document.getElementById("media-div");
+            audio.innerHTML = onPlay;
+            title.innerHTML =`${music[0].title}........... ` ;
+        
         })
 }
- 
-let songIndex = 1;
-// function loadSong(song) {
-//     fetch(`${SERVER_ROOT}/api/music?search=${id}`, {
-//         method: 'GET
-//         headers: {
-//         'Content-type': 'application/json; charset=UTF-8',
-//             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-//         }
-//     })
-//         .then(response => response.json())
-//         .then(music => {
-//             title.innerText = music.title;
-//             audio.src = music[0].urlPath;
-//         });
-// }
 
 
-// function palySong() {
-//     musicContainer.classList.add('play');
-//     playBtn.querySelector('i.fas').classList.remove('fa-play');
-//     playBtn.querySelector('i.fas').classList.add('fa-pause');
-//     audio.play();
-// }
 
-// function pauseSong() {
-//     musicContainer.classList.remove('play');
-//     playBtn.querySelector('i.fas').classList.add('fa-play');
-//     playBtn.querySelector('i.fas').classList.remove('fa-pause');
-//     audio.pause();
-// }
+function prevSong(obj) {
 
-// function playMusic() {
-//     const isPlaying = musicContainer.classList.contains('play');
-//     if (isPlaying) {
-//         pauseSong();
-//     } else {
-//         playSong();
-//     }
-// }
+    let title = document.getElementById('title');
+    let songIndex = Number(obj.getAttribute("data-prev"));
 
-// function prevSong() {
-//     songIndex--;
-//     if (songIndex < 0) {
-//         songIndex = songs.length - 1;
-//     }
-//     loadSong(songs[songIndex]);
-//     playSong();
-// }
+    fetch(`${SERVER_ROOT}/api/playlist`, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(response => response.json())
+        .then(music => {
+            let mySong = music.filter(songItem => songItem.orderId == songIndex-1);
+            let onPlay = ` 
+                 <button   id="prev"   onclick="prevSong(this);"  class="action-btn"   data-prev="${mySong[0].orderId}">  <i class="fas fa-backward"></i></button>
+                 <button   id="next"   onclick= "nextSong(this)"  class="action-btn"   data-next="${mySong[0].orderId}">  <i class="fas fa-forward"></i></button>
+                     <audio id="media-audio" controls autoplay>
+                          <source src="http://localhost:3000/${mySong[0].urlPath}" type="audio/mpeg">
+                     </audio>
+                  <button id ='repeat'  onclick="repeatMusic()" class="action-btn"><i class="fas fa-repeat"></i> </button> `;
+            let audio = document.getElementById("media-div");
+            audio.innerHTML = onPlay;
+            title.innerHTML = `${mySong[0].title}........... `;
+        }) 
+}
 
-// function nextSong() {
-//     songIndex++;
-//     if (songIndex > songs.length - 1) {
-//         songIndex = 0;
-//     }
-//     loadSong(songs[songIndex]);
-//     playSong();
-// }
+function nextSong(obj) {
 
+    let songIndex = Number(obj.getAttribute("data-next"));
+    let title = document.getElementById('title');
+    
+    fetch(`${SERVER_ROOT}/api/playlist`, {
+        method: 'GET',
+        headers: {
+            'Content-type':  'application/json; charset=UTF-8',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(response => response.json())
+        .then(music => {
+            let mySong = music.filter(songItem => songItem.orderId == songIndex +1);
+            let onPlay = ` 
+                 <button   id="prev"   onclick="prevSong(this);"  class="action-btn"   data-prev="${mySong[0].orderId}">  <i class="fas fa-backward"></i></button>
+                 <button   id="next"   onclick= "nextSong(this)"  class="action-btn"   data-next="${mySong[0].orderId}">  <i class="fas fa-forward"></i></button>
+                     <audio id="media-audio" controls autoplay>
+                          <source src="http://localhost:3000/${mySong[0].urlPath}" type="audio/mpeg">
+                     </audio>
+                  <button id ='repeat' onclick="repeatMusic()"  class="action-btn"><i class="fas fa-repeat"></i> </button> `;
+            let audio = document.getElementById("media-div");
+            audio.innerHTML = onPlay;
+            title.innerHTML = `${mySong[0].title}........... `;
+        })
+}
 
-// function updateProgress(e) {
-//     const { duration, currentTime } = e.srcElement;
-//     const progressPercent = (currentTime / duration) / 100;
-//     progress.style.width = `${progressPrecent}%`
-// }
+function repeatMusic(){
+    
+//on progress
 
-
-// function setProgress(e) {
-//     const width = this.clientWidth
-//     const clickX = e.offsetX;
-//     const duration = audio.duration;
-//     audio.currentTime = (clickX / width) * duration;
-// }
-
-
+}
 
 
 
